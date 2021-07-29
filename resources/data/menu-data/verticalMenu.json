@@ -1,0 +1,30 @@
+{
+  "menu": [
+    {
+      "name": "Dashboards",
+      "badge": "2",
+      "badgeClass": "badge badge-light-warning badge-pill ml-auto mr-1",
+      "icon": "home",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "/",
+          "name": "eCommerce",
+          "icon": "circle",
+          "slug": "dashboard-ecommerce"
+        }
+      ]
+    },
+
+    {
+      "navheader": "Options",
+      "slug": ""
+    },
+    {
+      "url": "advances/advance/report",
+      "name": "Advances",
+      "icon": "menu",
+      "slug": "advances-report"
+    }
+  ]
+}
