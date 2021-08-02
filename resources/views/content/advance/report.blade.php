@@ -22,13 +22,13 @@
           <thead>
             <tr>
               <th></th>
-              <th></th>
               <th>id</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Date</th>
-              <th>Salary</th>
-              <th>Status</th>
+              <th>Contact ID</th>
+              <th>Advance ID</th>
+              <th>Business name</th>
+              <th>Full name</th>
+              <th>Payment</th>
+              <th>Advance status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -61,6 +61,43 @@
           <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
         </div>
       </form>
+    </div>
+  </div>
+  <!-- Modal to show detail -->
+  <div class="modal fade" id="modal-detail">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Details of Lynda Denise Jones</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <tr data-dt-row="5997" data-dt-column="1">
+            <td>id:</td> 
+            <td>5998</td>
+          </tr>
+          <tr data-dt-row="5997" data-dt-column="2">
+            <td>Contact ID:</td> 
+            <td>453089167</td>
+          </tr>
+          <tr data-dt-row="5997" data-dt-column="3">
+            <td>Advance ID:</td> 
+            <td>1194241</td>
+          </tr>
+          <tr data-dt-row="5997" data-dt-column="4">
+            <td>Business name:</td> 
+            <td>A&amp;J Home improvements</td>
+          </tr>
+          <tr data-dt-row="5997" data-dt-column="5">
+            <td>Full name:</td>
+            <td>Lynda Denise Jones</td>
+          </tr>
+        </table>
+      </div>
+    </div>
     </div>
   </div>
 </section>

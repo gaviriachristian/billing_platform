@@ -17,6 +17,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ChartsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdvanceController;
+use App\Http\Controllers\AdvanceDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,28 +32,28 @@ use App\Http\Controllers\AdvanceController;
 
 // Main Page Route
 // Route::get('/', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce')->middleware('verified');
-Route::get('/', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce')->middleware('verified');
+Route::get('/', [AdvanceController::class,'advancesReport'])->name('dashboard')->middleware('verified');
 
 Auth::routes(['verify' => false]);
 
 /* Route Dashboards */
 Route::group(['prefix' => 'dashboard'], function () {
-  Route::get('analytics', [DashboardController::class,'dashboardAnalytics'])->name('dashboard-analytics');
-  Route::get('ecommerce', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce');
+  Route::get('analytics', [DashboardController::class,'dashboardAnalytics'])->name('dashboard-analytics')->middleware('verified');
+  Route::get('ecommerce', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce')->middleware('verified');
 });
 /* Route Dashboards */
 
 /* Route Advances */
 Route::group(['prefix' => 'advances'], function () {
-  Route::get('report', [AdvanceController::class,'advancesReport'])->name('advances-report');
+  Route::get('report', [AdvanceController::class,'advancesReport'])->name('advances-report')->middleware('verified');
+  Route::get('data', [AdvanceDataController::class,'index'])->name('advances-data')->middleware('verified');
+  Route::get('detail/{id}', [AdvanceDataController::class,'detail'])->name('advances-detail')->middleware('verified');
   // Route for export/download tabledata to .csv, .xls or .xlsx
-  //Route::get('export-csv/{type}', [AdvanceController::class, 'exportCsv'])->name('advances-export-csv');
+  //Route::get('export-csv/{type}', [AdvanceController::class, 'exportCsv'])->name('advances-export-csv')->middleware('verified');
   // Route for import excel data to database.
-  Route::post('import-csv', [AdvanceController::class, 'importCsv'])->name('advances-import-csv');
+  Route::post('import-csv', [AdvanceController::class, 'importCsv'])->name('advances-import-csv')->middleware('verified');
 });
 /* Route Advances */
-
-
 
 /* Route Apps */
 Route::group(['prefix' => 'app'], function () {
@@ -242,3 +243,8 @@ Route::get('/maps/leaflet', [ChartsController::class,'maps_leaflet'])->name('map
 
 // locale Route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
+
+
+Route::resources([
+  'finicity' => 'FinicityController',
+]);

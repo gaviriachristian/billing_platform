@@ -20,9 +20,9 @@ class CreateAdvanceReportTable extends Migration
             $table->string('business_name')->nullable();
             $table->string('full_name')->nullable();
             $table->date('funding_date')->nullable();
-            $table->date('last_history_date')->nullable();
-            $table->decimal('funding_amount')->nullable();
-            $table->decimal('rtr')->nullable();
+            $table->dateTime('last_history_date')->nullable();
+            $table->integer('funding_amount')->nullable();
+            $table->integer('rtr')->nullable();
             $table->decimal('payment')->nullable();
             $table->timestamps();
         });
