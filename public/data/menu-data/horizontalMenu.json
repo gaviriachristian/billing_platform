@@ -1,0 +1,29 @@
+{
+  "menu": [
+    {
+      "name": "Dashboards",
+      "icon": "home",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "dashboard/ecommerce",
+          "name": "eCommerce",
+          "icon": "shopping-cart",
+          "slug": "dashboard-ecommerce"
+        }
+      ]
+    },
+    {
+      "url": "advances/advance/report",
+      "name": "Advances",
+      "icon": "menu",
+      "slug": "advances-report"
+    },
+    {
+      "url": "advances/transactions/report",
+      "name": "Transactions",
+      "icon": "grid",
+      "slug": "transactions-report"
+    }
+  ]
+}

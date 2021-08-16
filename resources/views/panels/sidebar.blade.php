@@ -50,7 +50,8 @@ $configData = Helper::applClasses();
       @foreach($menuData[0]->menu as $menu)
       @if(isset($menu->navheader))
       <li class="navigation-header">
-        <span>{{ __('locale.'.$menu->navheader) }}</span>
+        <!-- <span>{{ __('locale.'.$menu->navheader) }}</span> -->
+        <span>{{ __(''.$menu->navheader) }}</span>
         <i data-feather="more-horizontal"></i>
       </li>
       @else
@@ -64,7 +65,8 @@ $configData = Helper::applClasses();
       <li class="nav-item {{ Route::currentRouteName() === $menu->slug ? 'active' : '' }} {{ $custom_classes }}">
         <a href="{{isset($menu->url)? url($menu->url):'javascript:void(0)'}}" class="d-flex align-items-center" target="{{isset($menu->newTab) ? '_blank':'_self'}}">
           <i data-feather="{{ $menu->icon }}"></i>
-          <span class="menu-title text-truncate">{{ __('locale.'.$menu->name) }}</span>
+          <!-- <span class="menu-title text-truncate">{{ __('locale.'.$menu->name) }}</span> -->
+          <span class="menu-title text-truncate">{{ __(''.$menu->name) }}</span>
           @if (isset($menu->badge))
           <?php $badgeClasses = "badge badge-pill badge-light-primary ml-auto mr-1" ?>
           <span class="{{ isset($menu->badgeClass) ? $menu->badgeClass : $badgeClasses }} ">{{$menu->badge}}</span>

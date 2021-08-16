@@ -5,10 +5,28 @@
       "slug": ""
     },
     {
-      "url": "advances/advance/report",
+      "url": "advances/report",
       "name": "Advances",
-      "icon": "menu",
-      "slug": "advances-report"
+      "icon": "play",
+      "slug": "advances-index"
+    },
+    {
+      "url": "payment/details/report",
+      "name": "Payment Details",
+      "icon": "credit-card",
+      "slug": "payment-details-report"
+    },
+    {
+      "url": "pm/funded/report",
+      "name": "PM Funded",
+      "icon": "square",
+      "slug": "payment-details-report"
+    },
+    {
+      "url": "nacha/report",
+      "name": "Nacha report",
+      "icon": "file-text",
+      "slug": "nacha-report"
     }
   ]
 }
