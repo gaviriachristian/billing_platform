@@ -49,6 +49,7 @@ class PmFundedController extends Controller
         // }
 
         $arrayImportFile = Excel::toArray(new PmFundedReportImport, $request->file('file'));
+        
         $importFundedReport = new PmFundedReportImport;
         if($importFundedReport->validateImport($arrayImportFile[0])) {
             dd("OK");

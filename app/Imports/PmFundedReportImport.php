@@ -20,6 +20,7 @@ class PmFundedReportImport implements ToModel, WithHeadingRow
     {
         $netFundingAmt = [];
         $syndicatorsAmtSum = [];
+        $count=0;
         foreach ($importData as $row) {
             $contactId = isset($row['contact_id']) && is_numeric($row['contact_id']) ? $row['contact_id'] : null;
             $advanceId = isset($row['advance_id']) && is_numeric($row['advance_id']) ? $row['advance_id'] : null;
@@ -30,17 +31,12 @@ class PmFundedReportImport implements ToModel, WithHeadingRow
             } else {
                 $syndicatorsAmtSum[$contactId.'_'.$advanceId] = $syndicatorsAmt; 
             }
+            echo $syndicatorsAmtSum[$contactId.'_'.$advanceId]." ---- ";
 
             if(!isset($netFundingAmt[$contactId.'_'.$advanceId]) || $netFundingAmt[$contactId.'_'.$advanceId]==0) {
                 $netFundingAmt[$contactId.'_'.$advanceId] = isset($row['net_funding_amt']) && is_numeric($row['net_funding_amt']) ? $row['net_funding_amt'] : 0;
                 $businessName[$contactId.'_'.$advanceId] = $row['business_name'];
             }
-
-            //session(['netFundingAmt' => $advanceId]);
-            //session(['syndicatorsAmt' => $advanceId]);
-            // if(!isset(session('synOfAdv')[$contactId.$advanceId])) {
-            //     session(['synOfAdv' => [$contactId.$advanceId => $synOfAdv]]);
-            // }
 
             $synOfAdv = isset($row['syn_of_adv']) && is_numeric($row['syn_of_adv']) ? $row['syn_of_adv'] : 0;
             if($synOfAdv < 1) {
@@ -54,6 +50,7 @@ class PmFundedReportImport implements ToModel, WithHeadingRow
                 session(['message' =>  'Validate the following errors in the imported file:<br />'.$message]);
             }
         }
+        
 
         foreach ($syndicatorsAmtSum as $index => $syndicatorsAmtTotal) {
             if ($syndicatorsAmtTotal != $netFundingAmt[$index]) {
