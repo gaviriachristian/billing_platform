@@ -21,8 +21,8 @@
         <table class="datatables-nacha table">
           <thead>
             <tr>
+              <th>ID</th>
               <th></th>
-              <th>id</th>
               <th>Name</th>
               <th>Routing number</th>
               <th>Account number</th>

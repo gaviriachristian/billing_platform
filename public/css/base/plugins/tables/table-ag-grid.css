@@ -9,7 +9,7 @@
 }
 .aggrid .ag-icon-checkbox-checked,
 .aggrid .ag-icon-checkbox-indeterminate {
-  color: #7367f0 !important;
+  color: #6ea516 !important;
 }
 .aggrid .ag-root-wrapper-body {
   min-height: calc(100% - 56px);
@@ -70,7 +70,7 @@
   }
 }
 .aggrid .ag-paging-panel span[ref=lbCurrent] {
-  background-color: #7367f0;
+  background-color: #6ea516;
 }
 .aggrid .ag-paging-panel span[ref=lbTotal] {
   background-color: #dae1e7;

@@ -21,8 +21,8 @@
         <table class="datatables-payment table">
           <thead>
             <tr>
+              <th>ID</th>
               <th></th>
-              <th>id</th>
               <th>Contact ID</th>
               <th>Trans ID</th>
               <th>Advance ID</th>

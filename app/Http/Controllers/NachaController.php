@@ -36,9 +36,9 @@ class NachaController extends Controller
         $validatedData = $request->validate([
            'file' => 'required',
         ]);
-        //dd($request->file('file'));
+
         NachaReport::truncate();
-        //dd($request->file('file'));
+
         $this->removeLines($request->file('file'),[0,1]);
         $this->removeLastLines($request->file('file'),12);
         Excel::import(new NachaReportImport, $request->file('file'));

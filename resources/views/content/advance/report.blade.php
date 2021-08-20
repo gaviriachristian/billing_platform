@@ -21,8 +21,8 @@
         <table class="datatables-advance table">
           <thead>
             <tr>
+              <th>ID</th>
               <th></th>
-              <th>id</th>
               <th>Contact ID</th>
               <th>Advance ID</th>
               <th>Business name</th>

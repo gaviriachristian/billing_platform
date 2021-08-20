@@ -36,17 +36,30 @@ class PmFundedController extends Controller
         $validatedData = $request->validate([
            'file' => 'required',
         ]);
-        
-        // Delete existing records        
-        $records = Excel::toArray(new PmFundedReportImport, $request->file('file'));
-        $ids = array_column($records[0], 'id');
-        $idsLimit = array_chunk($ids, 50000);
-        foreach ($idsLimit as $idsArray) {
-            PmFundedReport::whereIn('id', $idsArray)->delete();
+        session()->forget('message');
+
+        //PmFundedReport::truncate();
+
+        // // Delete existing records        
+        // $records = Excel::toArray(new PmFundedReportImport, $request->file('file'));
+        // $ids = array_column($records[0], 'id');
+        // $idsLimit = array_chunk($ids, 50000);
+        // foreach ($idsLimit as $idsArray) {
+        //     PmFundedReport::whereIn('id', $idsArray)->delete();
+        // }
+
+        $arrayImportFile = Excel::toArray(new PmFundedReportImport, $request->file('file'));
+        $importFundedReport = new PmFundedReportImport;
+        if($importFundedReport->validateImport($arrayImportFile[0])) {
+            dd("OK");
+            //Excel::import(new PmFundedReportImport, $request->file('file'));
         }
-        
-        Excel::import(new PmFundedReportImport, $request->file('file'));
+
         return back();
-        //return redirect('payment-details-report')->with('status', 'The file has been imported in laravel 8');
+        
+        // throw ValidationException::withMessages([
+        //     'Syndication percentage' => 'The percentage cannot be less than 100'
+        // ]);
+
     }
 }

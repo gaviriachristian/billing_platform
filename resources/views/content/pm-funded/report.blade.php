@@ -13,74 +13,83 @@
 @endsection
 
 @section('content')
-<!-- Basic table -->
-<section id="pm-funded-datatable">
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <table class="datatables-pm-funded table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>id</th>
-              <th>Contact ID</th>
-              <th>Advance ID</th>
-              <th>Funding date</th>
-              <th>Business name</th>
-              <th>Funding amount</th>
-              <th>RTR</th>
-              <th>Payment</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-        </table>
+  @if(session('message')!=null && session('message')!="")
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Errors</h4>
+        <div class="alert-body">
+          {!! session('message') !!}
+        </div>
+    </div>
+  @endif
+  {{ session()->forget('message') }}
+  <!-- Basic table -->
+  <section id="pm-funded-datatable">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <table class="datatables-pm-funded table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th></th>
+                <th>Contact ID</th>
+                <th>Advance ID</th>
+                <th>Funding date</th>
+                <th>Business name</th>
+                <th>Funding amount</th>
+                <th>RTR</th>
+                <th>Payment</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- Modal to import records -->
-  <div class="modal modal-slide-in fade" id="modals-slide-in">
-    <div class="modal-dialog sidebar-sm">
-      <form id="import-csv-form" method="POST" class="add-new-record modal-content pt-0" action="{{ route('pm-funded-import-csv') }}" accept-charset="utf-8" enctype="multipart/form-data">
-      @csrf
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-        <div class="modal-header mb-1">
-          <h5 class="modal-title" id="exampleModalLabel">Import Records</h5>
-        </div>
-        <div class="modal-body flex-grow-1">
-          <div class="form-group">
-            <div class="d-inline-block">
-              <div class="form-group mb-0">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
-                  <label class="custom-file-label" for="blogCustomFile">Choose file</label>
+    <!-- Modal to import records -->
+    <div class="modal modal-slide-in fade" id="modals-slide-in">
+      <div class="modal-dialog sidebar-sm">
+        <form id="import-csv-form" method="POST" class="add-new-record modal-content pt-0" action="{{ route('pm-funded-import-csv') }}" accept-charset="utf-8" enctype="multipart/form-data">
+        @csrf
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+          <div class="modal-header mb-1">
+            <h5 class="modal-title" id="exampleModalLabel">Import Records</h5>
+          </div>
+          <div class="modal-body flex-grow-1">
+            <div class="form-group">
+              <div class="d-inline-block">
+                <div class="form-group mb-0">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                    <label class="custom-file-label" for="blogCustomFile">Choose file</label>
+                  </div>
                 </div>
               </div>
+              <small class="form-text text-muted"> The file type must be csv </small>
             </div>
-            <small class="form-text text-muted"> The file type must be csv </small>
+            <button type="submit" class="btn btn-primary data-submit mr-1">Submit</button>
+            <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
           </div>
-          <button type="submit" class="btn btn-primary data-submit mr-1">Submit</button>
-          <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
-  <!-- Modal to show detail -->
-  <div class="modal fade" id="modal-detail">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
+    <!-- Modal to show detail -->
+    <div class="modal fade" id="modal-detail">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!--/ Basic table -->
+  </section>
+  <!--/ Basic table -->
 @endsection
 
 

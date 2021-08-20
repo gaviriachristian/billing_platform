@@ -129,7 +129,7 @@ $(function () {
           order: [[1, 'desc']],
           dom:
             textDom,
-          displayLength: 10,
+          displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
             /*
@@ -281,7 +281,7 @@ $(function () {
           order: [[1, 'desc']],
           dom:
             textDom,
-          displayLength: 10,
+          displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
             {
@@ -364,7 +364,8 @@ $(function () {
             render: function ( data, type, row, meta ) {
               return '<a class="item-details" onclick="showDetail('+data+',\'/pm/funded/\')">' +
                 feather.icons['file-text'].toSvg({ class: 'font-small-4' }) +
-                ' </a>';
+                ' </a> &nbsp; <a class="item-details" onclick="showSyndicateDetail('+data+',\'/pm/funded/\')">' +
+                feather.icons['zoom-in'].toSvg({ class: 'font-small-4' });
             }
           }
         ],
@@ -387,7 +388,7 @@ $(function () {
           order: [[1, 'desc']],
           dom:
             textDom,
-          displayLength: 10,
+          displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
             {
@@ -454,7 +455,6 @@ $(function () {
       url: "/nacha/data",
       type: "GET",
       success: function(nachaData){
-          console.log(nachaData);
           var dt_basic = dt_nacha_table.DataTable({
           data: nachaData,
           columns: [
@@ -494,7 +494,7 @@ $(function () {
           order: [[1, 'desc']],
           dom:
             textDom,
-          displayLength: 10,
+          displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
             {
@@ -600,7 +600,7 @@ $(function () {
           order: [[1, 'desc']],
           dom:
             textDom,
-          displayLength: 10,
+          displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
             {
@@ -767,3 +767,46 @@ function showDetail(id,prefixUrl)
   });
 }
 
+function showSyndicateDetail(id,prefixUrl)
+{
+  var htmlBody = "";
+  var titleClass = "";
+  $.ajax({
+    data: '',
+    url: prefixUrl+"syndicate/id/"+id,
+    type:"GET",
+    success:function(data) {
+      console.log(data);
+      data.forEach(function(element) {
+        var indexName = "", counter = 0;
+        var htmlTitle = 'Syndicate Detail '+id;
+        var dateValue;
+        htmlBody += '<table class="table">';
+        $(".modal-title").html(htmlTitle);
+        $.each(element, function(index, item) {
+          counter++;
+          titleClass = '';
+          if (index=='updated_at' || index=='created_at') {
+            dateValue = new Date(item);
+            item = dateValue.getFullYear()+'-'+(dateValue.getMonth()+1)+'-'+dateValue.getDate()+' '+dateValue.getHours()+':'+dateValue.getMinutes()+':'+dateValue.getSeconds();
+          }
+          if (index!='funded_report_id' && index!='id') {
+            if (index=='syndicators_name') {
+              titleClass = 'h5';
+            } 
+            indexName = index.replace("_", " ");
+            index = indexName.charAt(0).toUpperCase().concat(indexName.substring(1, indexName.length));
+            item = empty(item) ? "" : item;
+            htmlBody += '<tr data-dt-row="'+element.id+'" data-dt-column="'+counter+'"></tr>';
+            htmlBody += '<td class="'+titleClass+'">'+index+':</td>';
+            htmlBody += '<td class="'+titleClass+'">'+item+'</td>';
+            htmlBody += '</tr>';
+          }
+        });
+        htmlBody += '</table><br />';
+      });
+      $(".modal-body").html(htmlBody);
+      $("#modal-detail").modal("show");
+    }
+  });
+}

@@ -22,6 +22,7 @@ use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Controllers\PaymentDetailsDataController;
 use App\Http\Controllers\PmFundedController;
 use App\Http\Controllers\NachaController;
+use App\Http\Controllers\SyndicateDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,7 @@ Route::group(['prefix' => 'pm/funded'], function () {
   Route::get('report', [PmFundedController::class,'pmFundedReport'])->name('pm-funded-report')->middleware('verified');
   Route::get('data', [PmFundedController::class,'index'])->name('pm-funded-data')->middleware('verified');
   Route::get('detail/id/{id}', [PmFundedController::class,'detail'])->name('pm-funded-detail')->middleware('verified');
+  Route::get('syndicate/id/{id}', [SyndicateDetailController::class,'detail'])->name('pm-funded-syndicate')->middleware('verified');
   // Route for export/download tabledata to .csv, .xls or .xlsx
   // Route::get('export-csv/{type}', [PmFundedController::class, 'exportCsv'])->name('pm-funded-export-csv')->middleware('verified');
   // Route for import excel data to database.

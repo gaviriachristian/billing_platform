@@ -30,7 +30,9 @@ class AdvanceController extends Controller
         $validatedData = $request->validate([
            'file' => 'required',
         ]);
+        
         AdvanceReport::truncate();
+        
         Excel::import(new AdvanceReportImport, $request->file('file'));
         return back();
         // Excel::import(new AdvanceReportImport,$request->file('file'));

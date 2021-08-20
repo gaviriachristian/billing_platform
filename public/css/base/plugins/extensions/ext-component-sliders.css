@@ -44,14 +44,14 @@
   border: none;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #7367f0;
+  border: 2px solid #6ea516;
 }
 .noUi-handle:after, .noUi-handle:before {
   display: none;
 }
 
 .noUi-connect {
-  background: #7367f0;
+  background: #6ea516;
   box-shadow: none;
 }
 

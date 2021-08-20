@@ -18,14 +18,14 @@
     },
     {
       "url": "pm/funded/report",
-      "name": "PM Funded",
-      "icon": "square",
-      "slug": "payment-details-report"
+      "name": "Funded",
+      "icon": "package",
+      "slug": "pm-funded-report"
     },
     {
       "url": "nacha/report",
       "name": "Nacha report",
-      "icon": "file-text",
+      "icon": "clipboard",
       "slug": "nacha-report"
     }
   ]
