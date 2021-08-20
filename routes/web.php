@@ -18,6 +18,11 @@ use App\Http\Controllers\ChartsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdvanceController;
 use App\Http\Controllers\AdvanceDataController;
+use App\Http\Controllers\PaymentDetailsController;
+use App\Http\Controllers\PaymentDetailsDataController;
+use App\Http\Controllers\PmFundedController;
+use App\Http\Controllers\NachaController;
+use App\Http\Controllers\SyndicateDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +37,7 @@ use App\Http\Controllers\AdvanceDataController;
 
 // Main Page Route
 // Route::get('/', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce')->middleware('verified');
-Route::get('/', [AdvanceController::class,'advancesReport'])->name('dashboard')->middleware('verified');
+Route::get('/', [AdvanceController::class,'advancesReport'])->name('advances-report')->middleware('verified');
 
 Auth::routes(['verify' => false]);
 
@@ -45,15 +50,54 @@ Route::group(['prefix' => 'dashboard'], function () {
 
 /* Route Advances */
 Route::group(['prefix' => 'advances'], function () {
-  Route::get('report', [AdvanceController::class,'advancesReport'])->name('advances-report')->middleware('verified');
+  Route::get('index', [AdvanceController::class,'index'])->name('advances-index')->middleware('verified');
   Route::get('data', [AdvanceDataController::class,'index'])->name('advances-data')->middleware('verified');
-  Route::get('detail/{id}', [AdvanceDataController::class,'detail'])->name('advances-detail')->middleware('verified');
-  // Route for export/download tabledata to .csv, .xls or .xlsx
-  //Route::get('export-csv/{type}', [AdvanceController::class, 'exportCsv'])->name('advances-export-csv')->middleware('verified');
+  Route::get('detail/id/{id}', [AdvanceDataController::class,'detail'])->name('advances-detail')->middleware('verified');
+  Route::get('detail/view/id/{id}', [AdvanceController::class,'detailView'])->name('advances-detail-view')->middleware('verified');
+  Route::get('report', [AdvanceController::class,'advancesReport'])->name('advances-report')->middleware('verified');
   // Route for import excel data to database.
   Route::post('import-csv', [AdvanceController::class, 'importCsv'])->name('advances-import-csv')->middleware('verified');
+  // Route for export/download tabledata to .csv, .xls or .xlsx
+  // Route::get('export-csv/{type}', [AdvanceController::class, 'exportCsv'])->name('advances-export-csv')->middleware('verified');
 });
 /* Route Advances */
+
+/* Route Payment Details */
+Route::group(['prefix' => 'payment/details'], function () {
+  Route::get('report', [PaymentDetailsController::class,'paymentDetailsReport'])->name('payment-details-report')->middleware('verified');
+  Route::get('data', [PaymentDetailsDataController::class,'index'])->name('payment-details-data')->middleware('verified');
+  Route::get('detail/id/{id}', [PaymentDetailsDataController::class,'detail'])->name('payment-details-detail')->middleware('verified');
+  // Route for export/download tabledata to .csv, .xls or .xlsx
+  // Route::get('export-csv/{type}', [PaymentDetailsController::class, 'exportCsv'])->name('payment-details-export-csv')->middleware('verified');
+  // Route for import excel data to database.
+  Route::post('import-csv', [PaymentDetailsController::class, 'importCsv'])->name('payment-details-import-csv')->middleware('verified');
+});
+/* Route Payment Details */
+
+/* Route PM Funded */
+Route::group(['prefix' => 'pm/funded'], function () {
+  Route::get('report', [PmFundedController::class,'pmFundedReport'])->name('pm-funded-report')->middleware('verified');
+  Route::get('data', [PmFundedController::class,'index'])->name('pm-funded-data')->middleware('verified');
+  Route::get('detail/id/{id}', [PmFundedController::class,'detail'])->name('pm-funded-detail')->middleware('verified');
+  Route::get('syndicate/id/{id}', [SyndicateDetailController::class,'detail'])->name('pm-funded-syndicate')->middleware('verified');
+  // Route for export/download tabledata to .csv, .xls or .xlsx
+  // Route::get('export-csv/{type}', [PmFundedController::class, 'exportCsv'])->name('pm-funded-export-csv')->middleware('verified');
+  // Route for import excel data to database.
+  Route::post('import-csv', [PmFundedController::class, 'importCsv'])->name('pm-funded-import-csv')->middleware('verified');
+});
+
+/* Route Nacha */
+Route::group(['prefix' => 'nacha'], function () {
+  Route::get('report', [NachaController::class,'nachaReport'])->name('nacha-report')->middleware('verified');
+  Route::get('data', [NachaController::class,'index'])->name('nacha-data')->middleware('verified');
+  Route::get('detail/id/{id}', [NachaController::class,'detail'])->name('nacha-detail')->middleware('verified');
+  // Route for export/download tabledata to .csv, .xls or .xlsx
+  // Route::get('export-csv/{type}', [NachaController::class, 'exportCsv'])->name('nacha-export-csv')->middleware('verified');
+  // Route for import excel data to database.
+  Route::post('import-csv', [NachaController::class, 'importCsv'])->name('nacha-import-csv')->middleware('verified');
+});
+
+/* Route Payment Details */
 
 /* Route Apps */
 Route::group(['prefix' => 'app'], function () {

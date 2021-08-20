@@ -18,11 +18,11 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <table class="datatables-basic table">
+        <table class="datatables-advance table">
           <thead>
             <tr>
+              <th>ID</th>
               <th></th>
-              <th>id</th>
               <th>Contact ID</th>
               <th>Advance ID</th>
               <th>Business name</th>
@@ -65,39 +65,17 @@
   </div>
   <!-- Modal to show detail -->
   <div class="modal fade" id="modal-detail">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Details of Lynda Denise Jones</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        </div>
       </div>
-      <div class="modal-body">
-        <table class="table">
-          <tr data-dt-row="5997" data-dt-column="1">
-            <td>id:</td> 
-            <td>5998</td>
-          </tr>
-          <tr data-dt-row="5997" data-dt-column="2">
-            <td>Contact ID:</td> 
-            <td>453089167</td>
-          </tr>
-          <tr data-dt-row="5997" data-dt-column="3">
-            <td>Advance ID:</td> 
-            <td>1194241</td>
-          </tr>
-          <tr data-dt-row="5997" data-dt-column="4">
-            <td>Business name:</td> 
-            <td>A&amp;J Home improvements</td>
-          </tr>
-          <tr data-dt-row="5997" data-dt-column="5">
-            <td>Full name:</td>
-            <td>Lynda Denise Jones</td>
-          </tr>
-        </table>
-      </div>
-    </div>
     </div>
   </div>
 </section>
