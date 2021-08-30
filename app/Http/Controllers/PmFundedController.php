@@ -11,7 +11,7 @@ class PmFundedController extends Controller
 {
     public function index()
     {
-        $pmfunded = PmFundedReport::all('id','contact_id','advance_id','funding_date','business_name','funding_amount','rtr','payment');
+        $pmfunded = PmFundedReport::all('id','contact_id','business_name','last_name','first_name','address','city','state','zip_code','email','cell_phone');
         return $pmfunded;
     }
 
@@ -36,7 +36,7 @@ class PmFundedController extends Controller
         $validatedData = $request->validate([
            'file' => 'required',
         ]);
-        session()->forget('message');
+        //session()->forget('message');
 
         //PmFundedReport::truncate();
 
@@ -49,11 +49,11 @@ class PmFundedController extends Controller
         // }
 
         $arrayImportFile = Excel::toArray(new PmFundedReportImport, $request->file('file'));
-        
+        //$headers = array_keys($arrayImportFile[0]);
         $importFundedReport = new PmFundedReportImport;
+        //$importFundedReport->validateImportType($headers);
         if($importFundedReport->validateImport($arrayImportFile[0])) {
-            dd("OK");
-            //Excel::import(new PmFundedReportImport, $request->file('file'));
+            Excel::import(new PmFundedReportImport, $request->file('file'));
         }
 
         return back();

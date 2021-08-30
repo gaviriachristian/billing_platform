@@ -154,7 +154,6 @@
     "/vendors/js/editors/quill/ui/tooltip.js": "/vendors/js/editors/quill/ui/tooltip.js",
     "/vendors/js/extensions/dataTables.checkboxes.min.js": "/vendors/js/extensions/dataTables.checkboxes.min.js",
     "/vendors/js/extensions/dragula.min.js": "/vendors/js/extensions/dragula.min.js",
-    "/vendors/js/extensions/dropzone.min.js": "/vendors/js/extensions/dropzone.min.js",
     "/vendors/js/extensions/i18next.min.js": "/vendors/js/extensions/i18next.min.js",
     "/vendors/js/extensions/i18nextBrowserLanguageDetector.min.js": "/vendors/js/extensions/i18nextBrowserLanguageDetector.min.js",
     "/vendors/js/extensions/i18nextXHRBackend.min.js": "/vendors/js/extensions/i18nextXHRBackend.min.js",

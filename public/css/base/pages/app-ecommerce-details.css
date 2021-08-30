@@ -158,7 +158,7 @@
   border-color: #6ea516;
 }
 .ecommerce-application .product-color-options .selected .b-primary .filloption {
-  box-shadow: 0 2px 4px 0 rgba(115, 103, 240, 0.4);
+  box-shadow: 0 2px 4px 0 rgba(110,165,22, 0.4);
 }
 .ecommerce-application .product-color-options .selected .b-success {
   border-color: #28c76f;
@@ -185,7 +185,7 @@
   box-shadow: 0 2px 4px 0 rgba(0, 207, 232, 0.4);
 }
 .ecommerce-application .product-color-options .b-primary .filloption {
-  box-shadow: 0 2px 4px 0 rgba(115, 103, 240, 0.4);
+  box-shadow: 0 2px 4px 0 rgba(110,165,22, 0.4);
 }
 .ecommerce-application .product-color-options .b-success .filloption {
   box-shadow: 0 2px 4px 0 rgba(40, 199, 111, 0.4);

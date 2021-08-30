@@ -354,12 +354,15 @@ $(function () {
             { data: 'id' },
             { data: 'id' }, // used for sorting so will hide this column
             { data: 'contact_id' },
-            { data: 'advance_id' },
-            { data: 'funding_date' },
             { data: 'business_name' },
-            { data: 'funding_amount' },
-            { data: 'rtr' },
-            { data: 'payment' },
+            { data: 'last_name' },
+            { data: 'first_name' },
+            { data: 'address' },
+            { data: 'city' },
+            { data: 'state' },
+            { data: 'zip_code' },
+            { data: 'email' },
+            { data: 'cell_phone' },
             { data: 'id',
             render: function ( data, type, row, meta ) {
               return '<a class="item-details" onclick="showDetail('+data+',\'/pm/funded/\')">' +
@@ -776,7 +779,6 @@ function showSyndicateDetail(id,prefixUrl)
     url: prefixUrl+"syndicate/id/"+id,
     type:"GET",
     success:function(data) {
-      console.log(data);
       data.forEach(function(element) {
         var indexName = "", counter = 0;
         var htmlTitle = 'Syndicate Detail '+id;

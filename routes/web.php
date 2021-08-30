@@ -23,6 +23,8 @@ use App\Http\Controllers\PaymentDetailsDataController;
 use App\Http\Controllers\PmFundedController;
 use App\Http\Controllers\NachaController;
 use App\Http\Controllers\SyndicateDetailController;
+use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +49,16 @@ Route::group(['prefix' => 'dashboard'], function () {
   Route::get('ecommerce', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce')->middleware('verified');
 });
 /* Route Dashboards */
+
+/* Route Uploads */
+Route::get('upload-ui', [FileUploadController::class, 'dropzoneUi' ]);
+Route::post('file-upload', [FileUploadController::class, 'dropzoneFileUpload' ])->name('dropzoneFileUpload');
+
+Route::get('dropzone',[ImageController::class, 'index']);
+Route::post('dropzone/upload_image',[ImageController::class, 'upload_image'])->name('dropzone.upload_image');
+Route::get('dropzone/fetch_image',[ImageController::class, 'fetch_image'])->name('dropzone.fetch_image');
+Route::get('dropzone/delete_image',[ImageController::class, 'delete_image'])->name('dropzone.delete_image');
+/* Route Uploads */
 
 /* Route Advances */
 Route::group(['prefix' => 'advances'], function () {

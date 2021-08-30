@@ -78,6 +78,27 @@
       </div>
     </div>
   </div>
+  
+  @if(Session::has('message'))
+    <!-- Modal to show errors -->
+    <div class="modal fade" id="modal-errors">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Import results</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body" style="top:10px">
+            {!!Session::get('message')!!}
+          </div>
+        </div>
+      </div>
+    </div>
+  @endif
+  {{ session()->forget('message') }}
+
 </section>
 <!--/ Basic table -->
 @endsection
@@ -102,4 +123,8 @@
 @section('page-script')
   {{-- Page js files --}}
   <script src="{{ asset(mix('js/scripts/tables/table-datatables-basic.js')) }}"></script>
+  <script>
+    loadDiv('#sidebarBottom','/upload-ui');
+  </script>
+  <script>$( document ).ready(function() { $("#modal-errors").modal("show"); });</script>
 @endsection

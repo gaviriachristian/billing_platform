@@ -3,9 +3,23 @@
 	Version: 2.0
 	Author: PIXINVENT
 	Author URL: http://www.themeforest.net/user/pixinvent
-================================================================================
+================================================================================*/
 
-NOTE:
-------
-PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
-WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+.main-menu .navbar-header {
+	height: 5.45rem !important;
+}
+
+.option-right {
+	padding-right: 2px !important;
+}
+.sidebarBottom {
+	padding: 0 10px 10px 10px !important;
+}
+.dz-preview .dz-file-preview .dz-processing .dz-success .dz-complete .dz-message {
+	font-size: 1rem;
+    font-family: "Montserrat", Helvetica, Arial, serif !important;
+}
+.validateText {
+	font-size: 14px;
+	padding-bottom: 14px;
+}

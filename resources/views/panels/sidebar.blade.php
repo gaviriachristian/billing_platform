@@ -6,10 +6,7 @@ $configData = Helper::applClasses();
     <ul class="nav navbar-nav flex-row">
       <li class="nav-item mr-auto">
         <a class="navbar-brand" href="{{url('/')}}">
-          <span class="brand-logo">
-            <img class="img-fluid" class="text-primary" id="Path" src="{{asset('images/logo/logo.png')}}" width="30" height="24" alt="Login" />
-          </span>
-          <h2 class="brand-text">BittyAdvance</h2>
+            <img class="img-fluid" class="text-primary" id="Path" src="{{asset('images/logo/LogoBittyAdvance.png')}}" alt="Login" />
         </a>
       </li>
       <li class="nav-item nav-toggle">
@@ -60,7 +57,7 @@ $configData = Helper::applClasses();
       {{-- Foreach menu item ends --}}
     </ul>
   </div>
-  <div class="sidebarBottom">
+  <div class="sidebarBottom" id="sidebarBottom">
     
   </div>
 </div>

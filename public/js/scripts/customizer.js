@@ -216,3 +216,8 @@
   //   flag++;
   // });
 })(window, document, jQuery);
+
+function loadDiv(div,url)
+{
+  $(div).load(url);
+}

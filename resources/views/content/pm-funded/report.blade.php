@@ -13,15 +13,6 @@
 @endsection
 
 @section('content')
-  @if(session('message')!=null && session('message')!="")
-    <div class="alert alert-danger" role="alert">
-      <h4 class="alert-heading">Errors</h4>
-        <div class="alert-body">
-          {!! session('message') !!}
-        </div>
-    </div>
-  @endif
-  {{ session()->forget('message') }}
   <!-- Basic table -->
   <section id="pm-funded-datatable">
     <div class="row">
@@ -33,12 +24,15 @@
                 <th>ID</th>
                 <th></th>
                 <th>Contact ID</th>
-                <th>Advance ID</th>
-                <th>Funding date</th>
                 <th>Business name</th>
-                <th>Funding amount</th>
-                <th>RTR</th>
-                <th>Payment</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>E-mail</th>
+                <th>Cell Phone</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -88,6 +82,27 @@
         </div>
       </div>
     </div>
+
+    @if(Session::has('message'))
+      <!-- Modal to show errors -->
+      <div class="modal fade" id="modal-errors">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Import results</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body" style="top:10px">
+              {!!Session::get('message')!!}
+            </div>
+          </div>
+        </div>
+      </div>
+    @endif
+    {{ session()->forget('message') }}
+
   </section>
   <!--/ Basic table -->
 @endsection
@@ -112,10 +127,8 @@
 @section('page-script')
   {{-- Page js files --}}
   <script src="{{ asset(mix('js/scripts/tables/table-datatables-basic.js')) }}"></script>
+  <script>
+    loadDiv('#sidebarBottom','/upload-ui');
+  </script>
+  <script>$( document ).ready(function() { $("#modal-errors").modal("show"); });</script>
 @endsection
-
-<style>
-  .option-right {
-    padding-right: 2px !important;
-  }
-</style>
