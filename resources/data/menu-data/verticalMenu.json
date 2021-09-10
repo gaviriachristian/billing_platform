@@ -27,6 +27,12 @@
       "name": "Nacha report",
       "icon": "clipboard",
       "slug": "nacha-report"
+    },
+    {
+      "url": "companies/index",
+      "name": "Companies",
+      "icon": "layers",
+      "slug": "advances-index"
     }
   ]
 }

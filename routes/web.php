@@ -25,6 +25,7 @@ use App\Http\Controllers\NachaController;
 use App\Http\Controllers\SyndicateDetailController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\CompaniesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,15 @@ Route::group(['prefix' => 'advances'], function () {
   // Route::get('export-csv/{type}', [AdvanceController::class, 'exportCsv'])->name('advances-export-csv')->middleware('verified');
 });
 /* Route Advances */
+
+/* Route Companies */
+Route::group(['prefix' => 'companies'], function () {
+  Route::get('index', [CompaniesController::class,'index'])->name('companies-index')->middleware('verified');
+  Route::get('data', [CompaniesController::class,'data'])->name('companies-data')->middleware('verified');
+  Route::get('detail/id/{id}', [CompaniesController::class,'detail'])->name('companies-detail')->middleware('verified');
+  Route::get('detail/advance/data/{id}', [CompaniesController::class,'detailAdvanceData'])->name('companies-detail-advance-data')->middleware('verified');
+});
+/* Route Companies */
 
 /* Route Payment Details */
 Route::group(['prefix' => 'payment/details'], function () {

@@ -33,16 +33,16 @@ class NachaController extends Controller
     */
     public function importCsv(Request $request) 
     {
-        $validatedData = $request->validate([
-           'file' => 'required',
-        ]);
-
+        // $validatedData = $request->validate([
+        //    'file' => 'required',
+        // ]);
+        
         NachaReport::truncate();
 
         $this->removeLines($request->file('file'),[0,1]);
         $this->removeLastLines($request->file('file'),12);
         Excel::import(new NachaReportImport, $request->file('file'));
-        return back();
+        //return back();
         //return redirect('payment-details-report')->with('status', 'The file has been imported in laravel 8');
     }
 

@@ -39,7 +39,9 @@
 
     <script src="{{ asset('js/scripts/dropzone.js') }}"></script>
     <script type="text/javascript">
+        let counter = 1;
         Dropzone.autoDiscover = false;
+        
         $(document).ready(function() {
             var uploader = document.querySelector('#uploader');
             var dropzone = new Dropzone(uploader, {
@@ -51,16 +53,27 @@
                 init: function() {
                     this.on("success", function(file, response) {
                         var objResponse = JSON.parse(response);
+                        console.log("Success");
+                        console.log(objResponse);
                         // if (objResponse.status == 'success') {
                         //     $("#progressbar").html("<span style='color:red'>Success</span>"); 
                         // }
+
+                        $('#progressbar-'+counter).clone().appendTo('#progressbar-div').prop('id', 'progressbar-'+counter);
+                        counter++; 
                         if (objResponse.status == 'error') {
                             $("#progressbar").text("Failed");
                             $("#progressbar").toggleClass("progress-bar-danger");
                         }
+                    });
+                    this.on("complete", function() {
+                        console.log("Complete");
                         setTimeout(function(){ 
-                            $(location).attr('href','/pm/funded/report'); 
-                        }, 4000);
+                            //$(location).attr('href','/pm/funded/report'); 
+                            //window.location.hash = "#content-body"
+                            location.reload();
+                            // console.log("Import completed");
+                        }, 1500);
                     });
                     // this.on("error", function(file, response) {
                     //     $(".file-row").html('<div id="messagesText" style="color:red;padding-top:30px">'+response+'</div>');

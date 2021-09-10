@@ -130,5 +130,11 @@
   <script>
     loadDiv('#sidebarBottom','/upload-ui');
   </script>
-  <script>$( document ).ready(function() { $("#modal-errors").modal("show"); });</script>
+  <script>
+    $( document ).ready(function() { 
+      setTimeout(function(){ 
+        $("#modal-errors").modal("show"); 
+      }, 2000);
+    });
+  </script>
 @endsection

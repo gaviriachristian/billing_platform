@@ -2,13 +2,69 @@
 
 namespace App\Imports;
 
+use Session;
 use App\Models\AdvanceReport;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class AdvanceReportImport implements ToModel, WithHeadingRow
 {
+
+    /**
+    * @param array $importData
+    * @param string $fileName
+    *
+    * @return bool
+    */
+    public function validateImport(array $importData, $fileName="Undefined")
+    {
+        $count=0;
+        $message = "";
+        $errors = false;
+        
+        foreach ($importData as $row) {
+            $contactId = isset($row['contact_id']) && is_numeric($row['contact_id']) ? $row['contact_id'] : null;
+            $advanceId = isset($row['advance_id']) && is_numeric($row['advance_id']) ? $row['advance_id'] : null;
+
+            if(isset($row['business_name']) && !is_string($row['business_name'])) {
+                $message .= "<div class='alert alert-danger' role='alert'><div class='alert-body'>Business name \"".$row['business_name']."\" is invalid (Contact: ".$contactId.". Advance: ".$advanceId.").</div></div>";
+                $errors = true;
+                Log::channel('advance')->error('Business name "'.$row['business_name'].'" is invalid.', [
+                    'contact_id' => $contactId,
+                    'advance_id' => $advanceId
+                ]);
+            }
+            if(isset($row['funding_amount']) && !is_numeric($row['funding_amount'])) {
+                $message .= "<div class='alert alert-danger' role='alert'><div class='alert-body'>Funding amount \"".$row['funding_amount']."\" is invalid (Contact: ".$contactId.". Advance: ".$advanceId.").</div></div>";
+                $errors = true;
+                Log::channel('advance')->error('Funding amount "'.$row['funding_amount'].'" is invalid.', [
+                    'contact_id' => $contactId,
+                    'advance_id' => $advanceId
+                ]);
+            }
+            if(isset($row['payment']) && !is_numeric($row['payment'])) {
+                $message .= "<div class='alert alert-danger' role='alert'><div class='alert-body'>Payment \"".$row['payment']."\" is invalid (Contact: ".$contactId.". Advance: ".$advanceId.").</div></div>";
+                $errors = true;
+                Log::channel('advance')->error('Payment "'.$row['payment'].'" is invalid.', [
+                    'contact_id' => $contactId,
+                    'advance_id' => $advanceId
+                ]);
+            }
+        }
+        
+        if(!$errors) {
+            $message = "<div class='alert alert-success' role='alert'><div class='alert-body'>The file \"".$fileName."\" has been imported successfully.</div></div>";
+            Session::flash('message', Session::has('message') ? $message.Session::get('message') : $message);
+            return true;
+        } else {
+            $message = "<div class='validateText'>Validate the following errors in the \"".$fileName."\" imported file:</div>".$message;
+            Session::flash('message', Session::has('message') ? Session::get('message').$message : $message);
+            return false;
+        }
+    }
+    
     /**
     * @param array $row
     *

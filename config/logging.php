@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single','advance','paymentdetails','funded','nacha'],
             'ignore_exceptions' => false,
         ],
 
@@ -99,6 +99,37 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'advance' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/advance.log'),
+            'level' => env('LOG_LEVEL', 'error'),
+        ],
+
+        'paymentdetails' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/paymentdetails.log'),
+            'level' => env('LOG_LEVEL', 'error'),
+        ],
+
+        'funded' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/funded.log'),
+            'level' => env('LOG_LEVEL', 'error'),
+        ],
+
+        'nacha' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/nacha.log'),
+            'level' => env('LOG_LEVEL', 'error'),
+        ],
+
+        'failed' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/failed.log'),
+            'level' => env('LOG_LEVEL', 'error'),
+        ],
+
     ],
 
 ];

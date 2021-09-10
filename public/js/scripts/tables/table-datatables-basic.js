@@ -9,6 +9,8 @@ $(function () {
     dt_payment_table = $('.datatables-payment'),
     dt_pmfunded_table = $('.datatables-pm-funded'),
     dt_nacha_table =  $('.datatables-nacha'),
+    dt_companies_table =  $('.datatables-companies'),
+    dt_companies_advance_table = $('.datatables-companies-advance'),
     dt_index_table = $('.datatables-index'),
     dt_date_table = $('.dt-date'),
     dt_complex_header_table = $('.dt-complex-header'),
@@ -177,7 +179,6 @@ $(function () {
                 }, 50);
               }
             },
-            */
             {
               text: feather.icons['download'].toSvg({ class: 'mr-50 font-small-4' }) + 'Import Records',
               className: 'create-new btn btn-primary',
@@ -189,6 +190,7 @@ $(function () {
                 $(node).removeClass('btn-secondary');
               }
             }
+            */
           ],
           responsive: {
             details: {
@@ -235,6 +237,7 @@ $(function () {
     });
     $('div.head-label').html('<h6 class="mb-0">DataTable with Buttons</h6>');
   }
+
 
   if (dt_payment_table.length) {
     $.ajax({
@@ -284,6 +287,7 @@ $(function () {
           displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
+            /*
             {
               text: feather.icons['download'].toSvg({ class: 'mr-50 font-small-4' }) + 'Import Records',
               className: 'create-new btn btn-primary',
@@ -295,6 +299,7 @@ $(function () {
                 $(node).removeClass('btn-secondary');
               }
             }
+            */
           ],
           responsive: {
             details: {
@@ -394,6 +399,7 @@ $(function () {
           displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
+            /*
             {
               text: feather.icons['download'].toSvg({ class: 'mr-50 font-small-4' }) + 'Import Records',
               className: 'create-new btn btn-primary',
@@ -405,6 +411,7 @@ $(function () {
                 $(node).removeClass('btn-secondary');
               }
             }
+            */
           ],
           responsive: {
             details: {
@@ -500,6 +507,7 @@ $(function () {
           displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
+            /*
             {
               text: feather.icons['download'].toSvg({ class: 'mr-50 font-small-4' }) + 'Import Records',
               className: 'create-new btn btn-primary',
@@ -511,6 +519,7 @@ $(function () {
                 $(node).removeClass('btn-secondary');
               }
             }
+            */
           ],
           responsive: {
             details: {
@@ -518,6 +527,190 @@ $(function () {
                 header: function (row) {
                   var data = row.data();
                   return 'Details of ' + data['name'];
+                }
+              }),
+              type: 'column',
+              renderer: function (api, rowIdx, columns) {
+                var data = $.map(columns, function (col, i) {
+                  return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+                    ? '<tr data-dt-row="' +
+                        col.rowIndex +
+                        '" data-dt-column="' +
+                        col.columnIndex +
+                        '">' +
+                        '<td>' +
+                        col.title +
+                        ':' +
+                        '</td> ' +
+                        '<td>' +
+                        col.data +
+                        '</td>' +
+                        '</tr>'
+                    : '';
+                }).join('');
+    
+                return data ? $('<table class="table"/>').append(data) : false;
+              }
+            }
+          },
+          language: {
+            paginate: {
+              // remove previous & next text from pagination
+              previous: '&nbsp;',
+              next: '&nbsp;'
+            }
+          }
+        });        
+
+      }      
+    });
+    $('div.head-label').html('<h6 class="mb-0">DataTable with Buttons</h6>');
+  }
+
+  if (dt_companies_table.length) {
+    $.ajax({
+      data: '',
+      url: "/companies/data",
+      type: "GET",
+      success: function(balanceData){
+        var dt_basic = dt_companies_table.DataTable({
+          data: balanceData,
+          columns: [
+            { data: 'id' },
+            { data: 'id' }, // used for sorting so will hide this column
+            { data: 'contact_id' },
+            { data: 'business_name' },
+            { data: 'first_name' },
+            { data: 'last_name' },
+            { data: 'id',
+            render: function (data) {
+              return '<a class="item-details" href="detail/id/'+data+'">' +
+                feather.icons['file-text'].toSvg({ class: 'font-small-4' }) +
+                ' </a>';
+            }
+          }
+        ],
+          columnDefs: [
+            {
+              targets: 1,
+              visible: false
+            },
+            {
+              responsivePriority: 1,
+              targets: 3
+            },
+            {
+              // Actions
+              targets: -1,
+              title: 'Actions',
+              orderable: false,
+            }
+          ],
+          order: [[1, 'desc']],
+          dom:
+            textDom,
+          displayLength: 50,
+          lengthMenu: [10, 25, 50, 75, 100],
+          buttons: [],
+          responsive: {
+            details: {
+              display: $.fn.dataTable.Responsive.display.modal({
+                header: function (row) {
+                  var data = row.data();
+                  return 'Details of ' + data['business_name'];
+                }
+              }),
+              type: 'column',
+              renderer: function (api, rowIdx, columns) {
+                var data = $.map(columns, function (col, i) {
+                  return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+                    ? '<tr data-dt-row="' +
+                        col.rowIndex +
+                        '" data-dt-column="' +
+                        col.columnIndex +
+                        '">' +
+                        '<td>' +
+                        col.title +
+                        ':' +
+                        '</td> ' +
+                        '<td>' +
+                        col.data +
+                        '</td>' +
+                        '</tr>'
+                    : '';
+                }).join('');
+    
+                return data ? $('<table class="table"/>').append(data) : false;
+              }
+            }
+          },
+          language: {
+            paginate: {
+              // remove previous & next text from pagination
+              previous: '&nbsp;',
+              next: '&nbsp;'
+            }
+          }
+        });        
+
+      }      
+    });
+    $('div.head-label').html('<h6 class="mb-0">DataTable with Buttons</h6>');
+  }
+
+  if (dt_companies_advance_table.length) {
+    $.ajax({
+      data: '',
+      url: "/companies/detail/advance/data/"+$("#contactId").val(),
+      type: "GET",
+      success: function(balanceData){
+        var dt_basic = dt_companies_advance_table.DataTable({
+          data: balanceData,
+          columns: [
+            { data: 'id' },
+            { data: 'id' }, // used for sorting so will hide this column
+            { data: 'contact_id' },
+            { data: 'advance_id' },
+            { data: 'business_name' },
+            { data: 'full_name' },
+            { data: 'payment' },
+            { data: 'advance_status' },
+            { data: 'id',
+            render: function ( data, type, row, meta ) {
+              return '<a class="item-details" onclick="showDetail('+data+',\'/advances/\')">' +
+                feather.icons['file-text'].toSvg({ class: 'font-small-4' }) +
+                ' </a>';
+            }
+          }
+        ],
+          columnDefs: [
+            {
+              targets: 1,
+              visible: false
+            },
+            {
+              responsivePriority: 1,
+              targets: 3
+            },
+            {
+              // Actions
+              targets: -1,
+              title: 'Actions',
+              orderable: false,
+            }
+          ],
+          order: [[1, 'desc']],
+          dom:
+            textDom,
+          displayLength: 50,
+          lengthMenu: [10, 25, 50, 75, 100],
+          buttons: [],
+          responsive: {
+            details: {
+              display: $.fn.dataTable.Responsive.display.modal({
+                header: function (row) {
+                  var data = row.data();
+                  return 'Details of ' + data['full_name'];
                 }
               }),
               type: 'column',
@@ -606,6 +799,7 @@ $(function () {
           displayLength: 50,
           lengthMenu: [10, 25, 50, 75, 100],
           buttons: [
+            /*
             {
               text: feather.icons['download'].toSvg({ class: 'mr-50 font-small-4' }) + 'Import Records',
               className: 'create-new btn btn-primary',
@@ -617,6 +811,7 @@ $(function () {
                 $(node).removeClass('btn-secondary');
               }
             }
+            */
           ],
           responsive: {
             details: {
